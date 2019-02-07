@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Local Component Registration</title>
+  </head>
+  <body>
+
+    <div id="app">
+      <h3>첫 번째 인스턴스 영역</h3>
+      <my-global-component></my-global-component>
+      <my-local-component></my-local-component>
+    </div>
+
+    <hr>
+
+    <div id="app2">
+      <h3>두 번째 인스턴스 영역</h3>
+      <my-global-component></my-global-component>
+      <!--지역 컴포넌트 경우 Vue 인스턴스에서 컴포넌트 등록이 안되서 ERROR가 난다.-->
+      <my-local-component></my-local-component>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script>
+      //전역 컴포넌트 등록
+      Vue.component('my-global-component',{
+        template:'<div>전역 컴포넌트가 등록되었습니다!</div>'
+      });
+
+      //지역 컴포넌트 내용
+      var cmp={
+        //컴포넌트 내용
+        template: '<div>지역 컴포넌트가 등록되었습니다!</div>'
+      }
+      new Vue({
+        el: '#app',
+        //지역 컴포넌트 등록
+        components: {
+          'my-local-component': cmp
+        }
+      });
+
+      new Vue({
+        el: '#app2'
+      });
+
+
+    </script>
+  </body>
+</html>
