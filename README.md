@@ -1,6 +1,5 @@
-#Doit_vue.js
-##[Doit]vue.js_입문_학습용
-
+# Doit_vue.js
+## [Do it!]vue.js_입문 도서 학습 노트
 - Vue.js 연습용 repository 입니다.
 - 책을보며 한땀한땀 하는중입니다.
 
