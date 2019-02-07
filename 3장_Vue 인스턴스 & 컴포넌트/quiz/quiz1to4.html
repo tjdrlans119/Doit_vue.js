@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Instance Component Quiz</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app">
+      <header>
+        <h3>{{message}}</h3>
+      </header>
+      <my-global-component></my-global-component>
+      <my-local-component></my-local-component>
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script>
+      //전역 컴포넌트 등록
+      Vue.component('my-global-component',{
+        template:'<p>This is another Global child component!</p>'
+      });
+
+      //지역 컴포넌트 내용
+      var cmp={
+        //컴포넌트 내용
+        template: '<div>지역 컴포넌트가 등록되었습니다!</div>'
+      }
+
+      //인스턴스 생성
+      new Vue({
+        el: '#app',
+        data:{
+          message: 'This is a parent Component'
+        },
+        //지역 컴포넌트 등록
+        components: {
+          'my-local-component': cmp
+        }
+      });
+    </script>
+  </body>
+</html>
+<!--
+정리: 인스턴스 생성, 지역컴포넌트, 전역 컴포넌트 등록
+생각: 스크립트 작성시 순서가 틀리면 에러가남...
+     1. 전역 컴포넌트
+     2. 지역 컴포넌트
+     3. 인스턴스 생성
+     순서가 되야 만한다.
+
+     인스턴스 생성시 지역컴포넌트가 선언되지 않아서
+     스크립트가 로드되는동안 오류가 나는지 알았는데
+     그냥 순서를 맞춰 작성해야한다
+     이유는...조금더 적응하고나면 찾아보겟습...
+-->
