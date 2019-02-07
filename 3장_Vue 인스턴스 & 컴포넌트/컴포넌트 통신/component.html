@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue 컴포넌트간 통신과 유효범위</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app">
+      <my-component1></my-component1>
+      <my-component2></my-component2>
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script>
+
+      //첫 번째 컴포넌트
+      var cmp1={
+        template: '<div>첫 번째 지역 컴포넌트: {{cmp1Data}} </div>',
+        data: function(){
+          return{
+            cmp1Data:100
+          }
+        }
+      };
+
+      //두 번째 컴포넌트
+      var cmp2={
+        template: '<div>두 번째 지역 컴포넌트: {{cmp2Data}} </div>',
+        data: function(){
+          return{
+            //cmp1은 컴포넌트의 유효 범위로 인해 다른 컴포넌트의 값을 직접 접근하지 못한다.
+            cmp2Data: cmp1.data.cmp1Data
+          }
+        }
+      };
+
+      //인스턴스 생성
+      new Vue({
+        el: '#app',
+        //지역 컴포넌트 등록
+        components: {
+          'my-component1': cmp1,
+          'my-component2': cmp2
+        }
+      });
+    </script>
+  </body>
+</html>
+<!--
+정리: 인스턴스 생성, 지역컴포넌트, 전역 컴포넌트 등록
+생각: 스크립트 작성시 순서가 틀리면 에러가남...
+     1. 전역 컴포넌트
+     2. 지역 컴포넌트
+     3. 인스턴스 생성
+     순서가 되야 만한다.
+
+     인스턴스 생성시 지역컴포넌트가 선언되지 않아서
+     스크립트가 로드되는동안 오류가 나는지 알았는데
+     그냥 순서를 맞춰 작성해야한다
+     이유는...조금더 적응하고나면 찾아보겟습...
+-->

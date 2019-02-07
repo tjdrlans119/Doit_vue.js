@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue 상위에서 하위 컴포넌트로 데이터 전달하기(Props 속성)</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app">
+      <child-component v-bind:propsdata="message"> </child-component>
+      <test-component v-bind:msg="message"></test-component>
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script>
+
+      Vue.component('child-component',{
+        props:['propsdata'],
+        template: '<p> {{ propsdata }} </p>'
+      });
+
+      Vue.component('test-component',{
+        //props:['msg'],
+        template: '<p> {{msg}} </p>'
+      });
+
+      new Vue({
+        el: '#app',
+        data:{
+          message: 'Hello Vue! passed from parent Componet'
+        }
+
+      });
+    </script>
+  </body>
+</html>
+<!--
+정리:
+1. 인스턴스 생성
+2. 컴포넌트 생성(props 속성 지정)
+3. v-bind:propsdata="message" 속성값 입력
+  (해석: 인스턴스의 data:massage를 해당 컴포넌트 propsdata에 v-bind(대입)한다)
+4. 생성한 컴포넌트에서 template에 message값이 prosdata로 v-bind되어 들어온다
+생각:
+v-bind:propsdata="message"
+이거 해석이 인스턴스의 massage를 컴포넌트에 propsdata에 v-bind 한다.
+음.....propsdata=v-bind("message"); 이렇게 쓰고싶다..
+-->
