@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>뷰 라우터 예제</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app">
+      <h1>뷰 라우터 예제</h1>
+      <p>
+        <router-link to="/main">Main 컴포넌트로 이동</router-link>
+        <router-link to="/login">Login 컴포넌트로 이동</router-link>
+      </p>
+      <router-view></router-view>
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+      var Main = { template: '<div>main</div>'};
+      var Login = { template: '<div>login</div>'};
+
+      var routes = [
+        {path:'/main', component:Main},
+        {path:'/login', component:Login}
+      ];
+
+      var router = new VueRouter({
+        //mode: 'history', 
+        routes
+      });
+
+      var app = new Vue({
+        router
+      }).$mount('#app');
+
+
+    </script>
+  </body>
+</html>
