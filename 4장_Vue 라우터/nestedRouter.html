@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>네스티드 라우터 예제</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app">
+      <h1>네스티드 라우터 예제</h1>
+      <router-view></router-view>
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+      var User = {
+        template:'<div>UserComponent<router-view></router-view></div>'
+      };
+
+      var UserProfile = { template: '<p>User Profile Component</p>' };
+      var UserPost = { template: '<p>User Post Component</p>' };
+
+      var routes = [
+        {
+          path: '/user',
+          component: User,
+          children: [
+            {
+              path:'posts',
+              component: UserPost
+            },
+            {
+              path: 'profile',
+              component: UserProfile
+            },
+          ]
+        }
+      ];
+
+      var router = new VueRouter({
+        //mode: 'history',
+        routes
+      });
+
+      var app = new Vue({
+        router
+      }).$mount('#app');
+
+
+    </script>
+  </body>
+</html>
