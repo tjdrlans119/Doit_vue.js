@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue 상위에서 하위 컴포넌트로 데이터 전달하기(Event 발생과 수신)</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app">
+      <child-component v-on:show-log="printText"> </child-component>
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script>
+
+      Vue.component('child-component',{
+        template: '<button v-on:click="showLog">show</button>',
+        methods:{
+          showLog: function(){
+            this.$emit('show-log');
+          }
+        }
+      });
+
+      new Vue({
+        el: '#app',
+        data:{
+          message: 'Hello Vue! passed from parent Componet'
+        },
+        methods:{
+          printText: function() {
+            console.log("received an event");
+          }
+        }
+      });
+
+    </script>
+  </body>
+</html>
