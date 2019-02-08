@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>네임드 뷰 예제</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app">
+      <h1>네임드 뷰 예제</h1>
+      <router-view name="header"></router-view>
+      <router-view></router-view>
+      <router-view name="footer"></router-view>
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+      var Body = { template:'<div>This is Body</div>' };
+      var Header = { template:'<div>This is Header</div>' };
+      var Footer = { template:'<div>This is Footer</div>' };
+
+      var routes = [
+        {
+          path: '/',
+          components: {
+            default: Body,
+            header: Header,
+            footer: Footer
+          }
+        }
+      ];
+
+      var router = new VueRouter({
+        routes
+      });
+
+      var app = new Vue({
+        router
+      }).$mount('#app');
+
+
+    </script>
+  </body>
+</html>
