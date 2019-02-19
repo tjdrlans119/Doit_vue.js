@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>5장_Vue 템플릿</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app">
+      <h1>뷰 템플릿</h1>
+
+      <h3>{{message}}</h3>
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data:{
+          message:'Hello Vue.js!'
+        },
+        //template: '<h3>{{message}}</h3>' --> 템플레이트 사용한 경우.
+      });
+
+    </script>
+  </body>
+</html>
