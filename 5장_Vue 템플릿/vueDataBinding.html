@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>5장_Vue 템플릿</title>
+  </head>
+  <body>
+
+    <hr>
+    <div id="app" v-once>
+
+      데이터 바인딩
+      <h3>{{message}}</h3>
+      <p v-bind:id="idA">아이디 바인딩</p>
+      <p v-bind:class="classA">클래스 바인딩</p>
+      <p v-bind:style="styleA">스타일 바인딩</p>
+      <hr/>
+
+      자바스크립트 표현식
+      <p>{{message}}</p>
+      <p>{{message+"!!!"}}</p>
+      <p>{{message.split('').reverse().join('')}}</p>
+      <hr/>
+
+      디렉티브 ** v-디렉티브이름
+      <p v-if="flag">vue.js!!</p>
+      <ul>
+        <li v-for="system in systems">{{system}}</li>
+      </ul>
+      <p v-show="flag">vue.js!</p>
+      <h5 v-bind:id="uid">vue.js!</h5>
+      <button v-on:click="popupAlert">경고 창 버튼</button>
+      <button v-on:click="clickBtn(10000000000)">v-on 디렉티브로 메서드 호출할 때 인자 넘기기</button>
+      <button v-on:click="clickBtn2">이벤트 인자 넘기기</button>
+      <hr/>
+
+      템플릿 기법 computed와 methods 속성 차이.
+      <p>{{reversedMessage}}</p>
+      <button v-on:click="reversMsg">문자열 역순</button>
+
+      <hr/>
+      watch 속성
+      <input v-model="message">
+
+    </div>
+    <hr>
+
+    <script src="https://unpkg.com/vue@2.6.3/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data:{
+          message:'Hello Vue.js!',
+          idA:10,
+          classA: 'container',
+          styleA:'color:blue',
+          flag:true,
+          systems:['android','ios','window'],
+          uid:10
+        },
+        methods:{
+          popupAlert:function(){
+            return alert('경고경고경고');
+          },
+          clickBtn:function(num){
+            alert('clicked' + num);
+          },
+          clickBtn2:function(event){
+            alert(event+'로그참조');
+            console.log(event);
+          },
+          reversMsg: function(){
+            this.message = this.message.split('').reverse().join('');
+            return this.message;
+          }
+        },
+        computed:{
+          reversedMessage: function(){
+            return this.message.split('').reverse().join('');
+          }
+        },
+        watch:{
+          message: function(data){
+            console.log("message값이 바뀝니다: ",data);
+          }
+        }
+      });
+
+
+    </script>
+  </body>
+</html>
